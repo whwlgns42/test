@@ -109,6 +109,227 @@ const certificateData = [
         url: "https://nip.kdca.go.kr",
         fee: "무료",
         requiredDocs: "공동인증서 또는 신분증"
+    },
+    {
+        id: 11,
+        name: "근로소득원천징수영수증",
+        category: "소득·세금",
+        issuer: "국세청",
+        issueMethods: ["홈택스", "세무서 방문"],
+        description: "근로소득원천징수 내역을 증명하는 문서입니다.",
+        url: "https://www.hometax.go.kr",
+        fee: "무료",
+        requiredDocs: "공동인증서 또는 신분증"
+    },
+    // 추가 증명서 추가
+    {
+        id: 12,
+        name: "혼인관계증명서",
+        category: "주민등록·가족관계",
+        issuer: "법원행정처",
+        issueMethods: ["정부24", "주민센터 방문", "대법원 전자가족관계등록시스템"],
+        description: "혼인 및 이혼에 관한 사항을 증명하는 문서입니다.",
+        url: "https://efamily.scourt.go.kr",
+        fee: "1,000원 (온라인 발급 시)",
+        requiredDocs: "신분증"
+    },
+    {
+        id: 13,
+        name: "기본증명서",
+        category: "주민등록·가족관계",
+        issuer: "법원행정처",
+        issueMethods: ["정부24", "주민센터 방문", "대법원 전자가족관계등록시스템"],
+        description: "개인의 출생, 사망, 국적 등 신분사항을 증명하는 문서입니다.",
+        url: "https://efamily.scourt.go.kr",
+        fee: "1,000원 (온라인 발급 시)",
+        requiredDocs: "신분증"
+    },
+    {
+        id: 14,
+        name: "등기부등본",
+        category: "부동산",
+        issuer: "대법원",
+        issueMethods: ["인터넷등기소", "등기소 방문"],
+        description: "부동산의 소유권, 저당권 등 권리관계를 증명하는 문서입니다.",
+        url: "https://www.iros.go.kr",
+        fee: "1,000원~2,000원",
+        requiredDocs: "신분증"
+    },
+    {
+        id: 15,
+        name: "토지이용계획확인원",
+        category: "부동산",
+        issuer: "국토교통부",
+        issueMethods: ["정부24", "주민센터 방문"],
+        description: "토지의 이용계획과 규제내용을 확인하는 문서입니다.",
+        url: "https://www.gov.kr",
+        fee: "1,000원",
+        requiredDocs: "신분증"
+    },
+    {
+        id: 16,
+        name: "부동산종합공증명서",
+        category: "부동산",
+        issuer: "국토교통부",
+        issueMethods: ["정부24", "주민센터 방문", "부동산공부시스템"],
+        description: "토지와 건물의 다양한 정보를 종합적으로 증명하는 문서입니다.",
+        url: "https://www.gov.kr",
+        fee: "1,500원",
+        requiredDocs: "신분증"
+    },
+    {
+        id: 17,
+        name: "납세증명서",
+        category: "소득·세금",
+        issuer: "국세청",
+        issueMethods: ["홈택스", "세무서 방문"],
+        description: "국세의 납부 완료 여부를 증명하는 문서입니다.",
+        url: "https://www.hometax.go.kr",
+        fee: "무료 (온라인 발급 시)",
+        requiredDocs: "공동인증서 또는 신분증"
+    },
+    {
+        id: 18,
+        name: "사업자등록증명",
+        category: "소득·세금",
+        issuer: "국세청",
+        issueMethods: ["홈택스", "세무서 방문"],
+        description: "사업자등록 사실을 증명하는 문서입니다.",
+        url: "https://www.hometax.go.kr",
+        fee: "무료 (온라인 발급 시)",
+        requiredDocs: "공동인증서 또는 신분증"
+    },
+    {
+        id: 19,
+        name: "지방세납세증명서",
+        category: "소득·세금",
+        issuer: "지방자치단체",
+        issueMethods: ["위택스", "주민센터 방문"],
+        description: "지방세의 납부 완료 여부를 증명하는 문서입니다.",
+        url: "https://www.wetax.go.kr",
+        fee: "무료 (온라인 발급 시)",
+        requiredDocs: "공동인증서 또는 신분증"
+    },
+    {
+        id: 20,
+        name: "국세완납증명서",
+        category: "소득·세금",
+        issuer: "국세청",
+        issueMethods: ["홈택스", "세무서 방문"],
+        description: "모든 세금의 완납 여부를 증명하는 문서입니다.",
+        url: "https://www.hometax.go.kr",
+        fee: "무료 (온라인 발급 시)",
+        requiredDocs: "공동인증서 또는 신분증"
+    },
+    {
+        id: 21,
+        name: "성적증명서",
+        category: "교육",
+        issuer: "각 교육기관",
+        issueMethods: ["교육기관 방문", "교육기관 홈페이지"],
+        description: "학업 성적을 증명하는 문서입니다.",
+        url: "해당 교육기관 홈페이지",
+        fee: "500원~3,000원",
+        requiredDocs: "신분증"
+    },
+    {
+        id: 22,
+        name: "재학증명서",
+        category: "교육",
+        issuer: "각 교육기관",
+        issueMethods: ["교육기관 방문", "교육기관 홈페이지"],
+        description: "현재 학교에 재학 중임을 증명하는 문서입니다.",
+        url: "해당 교육기관 홈페이지",
+        fee: "500원~2,000원",
+        requiredDocs: "신분증 또는 학생증"
+    },
+    {
+        id: 23,
+        name: "교육비납입증명서",
+        category: "교육",
+        issuer: "각 교육기관",
+        issueMethods: ["교육기관 방문", "교육기관 홈페이지", "홈택스"],
+        description: "교육비 납입 내역을 증명하는 문서입니다.",
+        url: "해당 교육기관 홈페이지",
+        fee: "무료~1,000원",
+        requiredDocs: "신분증 또는 학생증"
+    },
+    {
+        id: 24,
+        name: "검정고시 합격증명서",
+        category: "교육",
+        issuer: "교육청",
+        issueMethods: ["정부24", "교육청 방문"],
+        description: "검정고시 합격 사실을 증명하는 문서입니다.",
+        url: "https://www.gov.kr",
+        fee: "무료",
+        requiredDocs: "신분증"
+    },
+    {
+        id: 25,
+        name: "재직증명서",
+        category: "고용·취업",
+        issuer: "근무지",
+        issueMethods: ["근무지 방문", "사내 시스템"],
+        description: "현재 회사에 재직 중임을 증명하는 문서입니다.",
+        url: "해당 근무지 문의",
+        fee: "무료",
+        requiredDocs: "사원증 또는 신분증"
+    },
+    {
+        id: 26,
+        name: "퇴직증명서",
+        category: "고용·취업",
+        issuer: "이전 근무지",
+        issueMethods: ["이전 근무지 방문", "우편 신청"],
+        description: "이전 직장의 퇴직 사실을 증명하는 문서입니다.",
+        url: "해당 근무지 문의",
+        fee: "무료~3,000원",
+        requiredDocs: "신분증"
+    },
+    {
+        id: 27,
+        name: "4대보험 가입증명서",
+        category: "고용·취업",
+        issuer: "국민건강보험공단",
+        issueMethods: ["4대사회보험 정보연계센터", "건강보험공단 방문"],
+        description: "국민연금, 건강보험, 고용보험, 산재보험의 가입 여부를 증명하는 문서입니다.",
+        url: "https://www.4insure.or.kr",
+        fee: "무료",
+        requiredDocs: "공동인증서 또는 신분증"
+    },
+    {
+        id: 28,
+        name: "건강검진결과서",
+        category: "건강·의료",
+        issuer: "국민건강보험공단",
+        issueMethods: ["건강보험공단 홈페이지", "검진기관 방문"],
+        description: "건강검진 결과를 증명하는 문서입니다.",
+        url: "https://www.nhis.or.kr",
+        fee: "무료 (온라인 발급 시)",
+        requiredDocs: "공동인증서 또는 신분증"
+    },
+    {
+        id: 29,
+        name: "진단서",
+        category: "건강·의료",
+        issuer: "의료기관",
+        issueMethods: ["의료기관 방문"],
+        description: "의사가 환자의 질병이나 상해 상태를 증명하는 문서입니다.",
+        url: "해당 의료기관 문의",
+        fee: "5,000원~30,000원",
+        requiredDocs: "신분증"
+    },
+    {
+        id: 30,
+        name: "의료비 납입증명서",
+        category: "건강·의료",
+        issuer: "의료기관",
+        issueMethods: ["의료기관 방문", "건강보험공단 홈페이지", "홈택스"],
+        description: "의료비 납부 내역을 증명하는 문서입니다.",
+        url: "https://www.nhis.or.kr",
+        fee: "무료~2,000원",
+        requiredDocs: "공동인증서 또는 신분증"
     }
 ];
 
