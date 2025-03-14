@@ -37,44 +37,53 @@
             <h2>피드백을 남겨주세요</h2>
             <p class="section-description">여러분의 의견은 저희 서비스를 개선하는 데 큰 도움이 됩니다.</p>
             
-            <div class="feedback-form-container">
-                <form action="/submit-feedback" method="POST" class="feedback-form">
-                    <div class="form-group">
-                        <label for="name">이름</label>
-                        <input type="text" id="name" name="name" placeholder="이름을 입력해주세요" required>
+            <div class="feedback-layout">
+                <div class="feedback-form-container">
+                    <form id="feedbackForm" class="feedback-form">
+                        <div class="form-group">
+                            <label for="name">이름</label>
+                            <input type="text" id="name" name="name" placeholder="이름을 입력해주세요" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">이메일</label>
+                            <input type="email" id="email" name="email" placeholder="이메일을 입력해주세요" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="feedback">피드백 내용</label>
+                            <textarea id="feedback" name="feedback" rows="6" placeholder="서비스에 대한 의견이나 개선점을 자유롭게 작성해주세요" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category">피드백 유형</label>
+                            <select id="category" name="category">
+                                <option value="suggestion">개선 제안</option>
+                                <option value="error">오류 신고</option>
+                                <option value="compliment">칭찬</option>
+                                <option value="question">문의사항</option>
+                                <option value="other">기타</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="agree" name="agree" required>
+                                <span class="checkmark"></span>
+                                개인정보 수집 및 이용에 동의합니다
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> 피드백 제출하기</button>
+                    </form>
+                </div>
+                
+                <div class="feedback-list-container">
+                    <h3>최근 피드백 목록</h3>
+                    <div class="feedback-list" id="feedbackList">
+                        <!-- 피드백 목록이 여기에 동적으로 추가됩니다 -->
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="email">이메일</label>
-                        <input type="email" id="email" name="email" placeholder="이메일을 입력해주세요" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="feedback">피드백 내용</label>
-                        <textarea id="feedback" name="feedback" rows="6" placeholder="서비스에 대한 의견이나 개선점을 자유롭게 작성해주세요" required></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="category">피드백 유형</label>
-                        <select id="category" name="category">
-                            <option value="suggestion">개선 제안</option>
-                            <option value="error">오류 신고</option>
-                            <option value="compliment">칭찬</option>
-                            <option value="question">문의사항</option>
-                            <option value="other">기타</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="checkbox-container">
-                            <input type="checkbox" id="agree" name="agree" required>
-                            <span class="checkmark"></span>
-                            개인정보 수집 및 이용에 동의합니다
-                        </label>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> 피드백 제출하기</button>
-                </form>
+                </div>
             </div>
         </div>
     </section>

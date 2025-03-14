@@ -529,7 +529,325 @@ button:focus {
         background-color: #7f6d00;
         color: #fff;
     }
+    
+    .feedback-section {
+        background-color: #121212;
+    }
+    
+    .feedback-section h2,
+    .feedback-form label,
+    .feedback-list-container h3,
+    .feedback-name {
+        color: #e0e0e0;
+    }
+    
+    .section-description,
+    .feedback-text {
+        color: #aaa;
+    }
+    
+    .feedback-form-container,
+    .feedback-list-container {
+        background-color: #1e1e1e;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .feedback-form input[type="text"],
+    .feedback-form input[type="email"],
+    .feedback-form textarea,
+    .feedback-form select {
+        background-color: #2a2a2a;
+        border-color: #444;
+        color: #e0e0e0;
+    }
+    
+    .feedback-form input[type="text"]:focus,
+    .feedback-form input[type="email"]:focus,
+    .feedback-form textarea:focus,
+    .feedback-form select:focus {
+        background-color: #333;
+        border-color: #4285f4;
+        box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.2);
+    }
+    
+    .checkbox-container {
+        color: #e0e0e0;
+    }
+    
+    .submit-btn {
+        background-color: #4285f4;
+    }
+    
+    .submit-btn:hover {
+        background-color: #3367d6;
+    }
+    
+    .feedback-item {
+        border-bottom-color: #333;
+    }
+    
+    .feedback-item:hover {
+        background-color: #2a2a2a;
+    }
+    
+    .feedback-list-container h3 {
+        border-bottom-color: #333;
+    }
+    
+    .feedback-date {
+        color: #999;
+    }
+    
+    .feedback-category {
+        background-color: #2a2a2a;
+        color: #aaa;
+    }
+    
+    .feedback-category.suggestion {
+        background-color: #0d47a1;
+        color: #e3f2fd;
+    }
+    
+    .feedback-category.error {
+        background-color: #b71c1c;
+        color: #ffebee;
+    }
+    
+    .feedback-category.compliment {
+        background-color: #1b5e20;
+        color: #e8f5e9;
+    }
+    
+    .feedback-category.question {
+        background-color: #e65100;
+        color: #fff8e1;
+    }
 }
 
 /* 폰트 임포트 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+/* 피드백 폼 스타일 */
+.feedback-section {
+    padding: 60px 0;
+    background-color: #f8f9fa;
+}
+
+.feedback-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #333;
+}
+
+.section-description {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #666;
+}
+
+/* 피드백 레이아웃 */
+.feedback-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.feedback-form-container {
+    flex: 1;
+    min-width: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+    padding: 30px;
+}
+
+/* 피드백 목록 컨테이너 */
+.feedback-list-container {
+    flex: 1;
+    min-width: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+    padding: 30px;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+}
+
+.feedback-list-container h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+}
+
+.feedback-list {
+    overflow-y: auto;
+    max-height: 500px;
+    flex-grow: 1;
+}
+
+.feedback-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s;
+}
+
+.feedback-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.feedback-item:hover {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0 0 10px 0;
+}
+
+.feedback-item-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.feedback-name {
+    font-weight: 600;
+    color: #333;
+}
+
+.feedback-date {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.feedback-category {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    border-radius: 20px;
+    background-color: #e9ecef;
+    color: #495057;
+    margin-bottom: 10px;
+}
+
+.feedback-category.suggestion {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+.feedback-category.error {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.feedback-category.compliment {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.feedback-category.question {
+    background-color: #fff8e1;
+    color: #f57f17;
+}
+
+.feedback-text {
+    color: #555;
+    line-height: 1.5;
+}
+
+.feedback-form .form-group {
+    margin-bottom: 20px;
+}
+
+.feedback-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+.feedback-form input[type="text"],
+.feedback-form input[type="email"],
+.feedback-form textarea,
+.feedback-form select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f5f5f5;
+    color: #333;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.feedback-form input[type="text"]:focus,
+.feedback-form input[type="email"]:focus,
+.feedback-form textarea:focus,
+.feedback-form select:focus {
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+    outline: none;
+    background-color: #fff;
+}
+
+.feedback-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    user-select: none;
+    color: #333;
+    cursor: pointer;
+}
+
+.checkbox-container input {
+    margin-right: 10px;
+}
+
+.submit-btn {
+    background-color: #1a73e8;
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.submit-btn:hover {
+    background-color: #1669d3;
+}
+
+.submit-btn i {
+    margin-right: 8px;
+}
+
+/* 피드백 목록 응답형 조정 */
+@media (max-width: 960px) {
+    .feedback-layout {
+        flex-direction: column;
+    }
+    
+    .feedback-form-container,
+    .feedback-list-container {
+        width: 100%;
+    }
+    
+    .feedback-list {
+        max-height: 400px;
+    }
+} 
