@@ -3,19 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="다양한 공공기관, 교육기관, 민간기관의 모든 증명서를 한 곳에서 검색하고 발급받을 수 있는 서비스입니다.">
+    <meta name="keywords" content="증명서, 공공기관, 민원서류, 주민등록등본, 가족관계증명서, 소득증명서, 발급, 민원">
+    <meta name="author" content="증명서 한곳에">
     <title>증명서 한곳에 - 모든 증명서를 한 곳에서</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- 파비콘 추가 -->
+    <link rel="icon" type="image/png" href="https://img.icons8.com/color/48/000000/certificate.png">
 </head>
 <body>
     <header>
         <div class="container">
             <div class="logo">
-                <h1><a href="index.html">증명서 한곳에</a></h1>
+                <h1><a href="index.html" aria-label="증명서 한곳에 홈페이지">증명서 한곳에</a></h1>
             </div>
-            <nav>
+            <nav aria-label="메인 메뉴">
                 <ul>
-                    <li><a href="#" class="active">홈</a></li>
+                    <li><a href="#" class="active" aria-current="page">홈</a></li>
                     <li><a href="#">서비스 소개</a></li>
                     <li><a href="#">자주 묻는 질문</a></li>
                     <li><a href="#">이용 안내</a></li>
@@ -27,10 +35,11 @@
     <section class="hero">
         <div class="container">
             <h2>다양한 공공기관, 교육기관, 민간기관의<br>모든 증명서를 한 곳에서 발급받으세요</h2>
-            <div class="search-box">
-                <input type="text" id="search-input" placeholder="찾으시는 증명서 이름을 입력하세요">
-                <button id="search-button"><i class="fas fa-search"></i> 검색</button>
+            <div class="search-box" role="search">
+                <input type="text" id="search-input" placeholder="찾으시는 증명서 이름을 입력하세요" aria-label="증명서 검색" autocomplete="off">
+                <button id="search-button" aria-label="검색하기"><i class="fas fa-search"></i> 검색</button>
             </div>
+            <p class="search-hint">예시: 주민등록등본, 졸업증명서, 소득금액증명 등 (실시간 검색 지원)</p>
         </div>
     </section>
 
@@ -38,70 +47,70 @@
         <div class="container">
             <h3>증명서 카테고리</h3>
             <div class="category-container">
-                <div class="category-card">
-                    <i class="fas fa-id-card"></i>
+                <div class="category-card" tabindex="0" role="button" aria-label="주민등록·가족관계 카테고리">
+                    <i class="fas fa-id-card" aria-hidden="true"></i>
                     <h4>주민등록·가족관계</h4>
                     <ul>
-                        <li><a href="#">주민등록등본</a></li>
-                        <li><a href="#">주민등록초본</a></li>
-                        <li><a href="#">가족관계증명서</a></li>
-                        <li><a href="#">혼인관계증명서</a></li>
-                        <li><a href="#">기본증명서</a></li>
+                        <li><a href="#" aria-label="주민등록등본 검색">주민등록등본</a></li>
+                        <li><a href="#" aria-label="주민등록초본 검색">주민등록초본</a></li>
+                        <li><a href="#" aria-label="가족관계증명서 검색">가족관계증명서</a></li>
+                        <li><a href="#" aria-label="혼인관계증명서 검색">혼인관계증명서</a></li>
+                        <li><a href="#" aria-label="기본증명서 검색">기본증명서</a></li>
                     </ul>
                 </div>
-                <div class="category-card">
-                    <i class="fas fa-home"></i>
+                <div class="category-card" tabindex="0" role="button" aria-label="부동산 카테고리">
+                    <i class="fas fa-home" aria-hidden="true"></i>
                     <h4>부동산</h4>
                     <ul>
-                        <li><a href="#">토지대장</a></li>
-                        <li><a href="#">건축물대장</a></li>
-                        <li><a href="#">등기부등본</a></li>
-                        <li><a href="#">토지이용계획확인원</a></li>
-                        <li><a href="#">부동산종합증명서</a></li>
+                        <li><a href="#" aria-label="토지대장 검색">토지대장</a></li>
+                        <li><a href="#" aria-label="건축물대장 검색">건축물대장</a></li>
+                        <li><a href="#" aria-label="등기부등본 검색">등기부등본</a></li>
+                        <li><a href="#" aria-label="토지이용계획확인원 검색">토지이용계획확인원</a></li>
+                        <li><a href="#" aria-label="부동산종합증명서 검색">부동산종합증명서</a></li>
                     </ul>
                 </div>
-                <div class="category-card">
-                    <i class="fas fa-won-sign"></i>
+                <div class="category-card" tabindex="0" role="button" aria-label="소득·세금 카테고리">
+                    <i class="fas fa-won-sign" aria-hidden="true"></i>
                     <h4>소득·세금</h4>
                     <ul>
-                        <li><a href="#">소득금액증명</a></li>
-                        <li><a href="#">납세증명서</a></li>
-                        <li><a href="#">사업자등록증명</a></li>
-                        <li><a href="#">지방세납세증명서</a></li>
-                        <li><a href="#">국세완납증명서</a></li>
+                        <li><a href="#" aria-label="소득금액증명 검색">소득금액증명</a></li>
+                        <li><a href="#" aria-label="납세증명서 검색">납세증명서</a></li>
+                        <li><a href="#" aria-label="사업자등록증명 검색">사업자등록증명</a></li>
+                        <li><a href="#" aria-label="지방세납세증명서 검색">지방세납세증명서</a></li>
+                        <li><a href="#" aria-label="국세완납증명서 검색">국세완납증명서</a></li>
                     </ul>
                 </div>
-                <div class="category-card">
-                    <i class="fas fa-graduation-cap"></i>
+                <div class="category-card" tabindex="0" role="button" aria-label="교육 카테고리">
+                    <i class="fas fa-graduation-cap" aria-hidden="true"></i>
                     <h4>교육</h4>
                     <ul>
-                        <li><a href="#">졸업증명서</a></li>
-                        <li><a href="#">성적증명서</a></li>
-                        <li><a href="#">재학증명서</a></li>
-                        <li><a href="#">교육비납입증명서</a></li>
-                        <li><a href="#">검정고시 합격증명서</a></li>
+                        <li><a href="#" aria-label="졸업증명서 검색">졸업증명서</a></li>
+                        <li><a href="#" aria-label="성적증명서 검색">성적증명서</a></li>
+                        <li><a href="#" aria-label="재학증명서 검색">재학증명서</a></li>
+                        <li><a href="#" aria-label="교육비납입증명서 검색">교육비납입증명서</a></li>
+                        <li><a href="#" aria-label="검정고시 합격증명서 검색">검정고시 합격증명서</a></li>
                     </ul>
                 </div>
-                <div class="category-card">
-                    <i class="fas fa-briefcase"></i>
+                <div class="category-card" tabindex="0" role="button" aria-label="고용·취업 카테고리">
+                    <i class="fas fa-briefcase" aria-hidden="true"></i>
                     <h4>고용·취업</h4>
                     <ul>
-                        <li><a href="#">경력증명서</a></li>
-                        <li><a href="#">재직증명서</a></li>
-                        <li><a href="#">퇴직증명서</a></li>
-                        <li><a href="#">4대보험 가입증명서</a></li>
-                        <li><a href="#">근로소득원천징수영수증</a></li>
+                        <li><a href="#" aria-label="경력증명서 검색">경력증명서</a></li>
+                        <li><a href="#" aria-label="재직증명서 검색">재직증명서</a></li>
+                        <li><a href="#" aria-label="퇴직증명서 검색">퇴직증명서</a></li>
+                        <li><a href="#" aria-label="4대보험 가입증명서 검색">4대보험 가입증명서</a></li>
+                        <li><a href="#" aria-label="근로소득원천징수영수증 검색">근로소득원천징수영수증</a></li>
                     </ul>
                 </div>
-                <div class="category-card">
-                    <i class="fas fa-file-medical"></i>
+                <div class="category-card" tabindex="0" role="button" aria-label="건강·의료 카테고리">
+                    <i class="fas fa-file-medical" aria-hidden="true"></i>
                     <h4>건강·의료</h4>
                     <ul>
-                        <li><a href="#">건강보험자격득실확인서</a></li>
-                        <li><a href="#">건강검진결과서</a></li>
-                        <li><a href="#">진단서</a></li>
-                        <li><a href="#">의료비 납입증명서</a></li>
-                        <li><a href="#">예방접종증명서</a></li>
+                        <li><a href="#" aria-label="건강보험자격득실확인서 검색">건강보험자격득실확인서</a></li>
+                        <li><a href="#" aria-label="건강검진결과서 검색">건강검진결과서</a></li>
+                        <li><a href="#" aria-label="진단서 검색">진단서</a></li>
+                        <li><a href="#" aria-label="의료비 납입증명서 검색">의료비 납입증명서</a></li>
+                        <li><a href="#" aria-label="예방접종증명서 검색">예방접종증명서</a></li>
                     </ul>
                 </div>
             </div>
@@ -155,9 +164,9 @@
                 </div>
                 <div class="footer-contact">
                     <h4>고객센터</h4>
-                    <p><i class="fas fa-phone"></i> 02-123-4567</p>
-                    <p><i class="fas fa-envelope"></i> support@certs.kr</p>
-                    <p><i class="fas fa-clock"></i> 평일 09:00 - 18:00</p>
+                    <p><i class="fas fa-phone" aria-hidden="true"></i> 02-123-4567</p>
+                    <p><i class="fas fa-envelope" aria-hidden="true"></i> support@certs.kr</p>
+                    <p><i class="fas fa-clock" aria-hidden="true"></i> 평일 09:00 - 18:00</p>
                 </div>
             </div>
             <div class="copyright">

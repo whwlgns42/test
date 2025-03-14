@@ -96,6 +96,12 @@ nav ul li a.active {
     border: none;
     border-radius: 5px 0 0 5px;
     font-size: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
 }
 
 .search-box button {
@@ -108,10 +114,33 @@ nav ul li a.active {
     border-radius: 0 5px 5px 0;
     cursor: pointer;
     transition: background-color 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .search-box button:hover {
     background-color: #fcc419;
+}
+
+.search-hint {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* 검색 효과 */
+.search-box.active input {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+.search-box input:focus {
+    animation: pulse 2s infinite;
 }
 
 /* 카테고리 섹션 */
@@ -307,41 +336,198 @@ footer {
 @media (max-width: 768px) {
     header .container {
         flex-direction: column;
+        padding: 10px 15px;
     }
-
+    
+    .logo h1 {
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    
     nav ul {
-        margin-top: 15px;
+        justify-content: center;
+        padding: 5px 0;
+        flex-wrap: wrap;
     }
-
+    
     nav ul li {
-        margin-left: 15px;
+        margin: 5px 10px;
     }
-
+    
+    .hero {
+        padding: 40px 0;
+    }
+    
     .hero h2 {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
     }
-
+    
     .search-box {
         flex-direction: column;
+        max-width: 90%;
+        gap: 10px;
     }
-
-    .search-box input,
-    .search-box button {
-        width: 100%;
+    
+    .search-box input {
         border-radius: 5px;
+        padding: 12px;
+        width: 100%;
     }
-
+    
     .search-box button {
-        margin-top: 10px;
+        border-radius: 5px;
+        padding: 12px;
+        width: 100%;
     }
-
+    
+    .category-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .category-card {
+        padding: 15px;
+    }
+    
     .service-steps {
         flex-direction: column;
     }
-
+    
+    .step {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
     .footer-content {
         flex-direction: column;
-        gap: 30px;
+        gap: 20px;
+    }
+}
+
+/* 태블릿 최적화 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .category-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .service-steps {
+        flex-wrap: wrap;
+    }
+    
+    .step {
+        flex: 0 0 calc(50% - 10px);
+        margin-bottom: 20px;
+    }
+    
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* 접근성 개선 */
+:focus {
+    outline: 2px solid #1a73e8;
+    outline-offset: 2px;
+}
+
+input:focus::placeholder {
+    color: transparent;
+}
+
+button:focus {
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.3);
+}
+
+/* 터치 기기 최적화 */
+@media (hover: none) {
+    .category-card, .result-card, button, a {
+        transition: none;
+    }
+    
+    .category-card:active, .result-card:active {
+        transform: scale(0.98);
+    }
+    
+    .search-box button:active {
+        background-color: #fcc419;
+    }
+}
+
+/* 다크 모드 지원 (시스템 설정 기반) */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+    
+    header, .category-card, .step, .result-card {
+        background-color: #1e1e1e;
+        color: #e0e0e0;
+    }
+    
+    .logo h1 {
+        color: #4285f4;
+    }
+    
+    .hero {
+        background: linear-gradient(135deg, #1a237e, #4a148c);
+    }
+    
+    .category-card h4, .step h4 {
+        color: #e0e0e0;
+        border-color: #333;
+    }
+    
+    .category-card ul li a {
+        color: #bbb;
+    }
+    
+    .category-card ul li a:hover {
+        color: #4285f4;
+    }
+    
+    .search-box input {
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+        border: 1px solid #444;
+    }
+    
+    .search-box button {
+        background-color: #ffd43b;
+    }
+    
+    .search-box button:hover {
+        background-color: #e6be32;
+    }
+    
+    .no-results {
+        background-color: #1e1e1e;
+    }
+    
+    .result-card {
+        background-color: #1e1e1e;
+    }
+    
+    .cert-link {
+        background-color: #4285f4;
+    }
+    
+    .cert-link:hover {
+        background-color: #3367d6;
+    }
+    
+    .suggestion-tag, .related-tag {
+        background-color: #263238;
+        color: #4285f4;
+    }
+    
+    .suggestion-tag:hover, .related-tag:hover {
+        background-color: #37474f;
+    }
+    
+    .highlight {
+        background-color: #7f6d00;
+        color: #fff;
     }
 }
 

@@ -117,18 +117,106 @@ document.addEventListener('DOMContentLoaded', function() {
     // 검색 기능 구현
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
+    const searchBox = document.querySelector('.search-box');
+    
+    // 카테고리 카드 선언 (변수 중복 선언 오류 해결)
+    const categoryCards = document.querySelectorAll('.category-card');
+    
+    // 검색창 포커스 시 효과
+    searchInput.addEventListener('focus', function() {
+        searchBox.classList.add('active');
+    });
+    
+    searchInput.addEventListener('blur', function() {
+        searchBox.classList.remove('active');
+    });
+    
+    // 페이지 로드 시 검색창에 포커스
+    setTimeout(() => {
+        searchInput.focus();
+    }, 1000);
+    
+    // 실시간 검색을 위한 디바운스 함수
+    function debounce(func, delay) {
+        let timer;
+        return function() {
+            const context = this;
+            const args = arguments;
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                func.apply(context, args);
+            }, delay);
+        };
+    }
+    
+    // 실시간 검색 이벤트 - 타이핑 후 300ms가 지나면 검색 실행
+    searchInput.addEventListener('input', debounce(function() {
+        const searchTerm = searchInput.value.trim();
+        if (searchTerm.length >= 1) { // 최소 1글자 이상 입력해야 검색
+            showLoadingIndicator();
+            // 실제 검색은 비동기적으로 처리하는 것을 시뮬레이션
+            setTimeout(() => {
+                performSearch();
+            }, 300);
+        } else if (searchTerm === '') {
+            // 검색어가 없으면 결과 섹션 제거
+            const existingResults = document.querySelector('.search-results');
+            if (existingResults) {
+                existingResults.remove();
+            }
+        }
+    }, 300));
 
     // 검색 버튼 클릭 이벤트
     searchButton.addEventListener('click', function() {
+        showLoadingIndicator();
         performSearch();
     });
 
     // 엔터 키 이벤트
     searchInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
+            showLoadingIndicator();
             performSearch();
         }
     });
+    
+    // 로딩 인디케이터 표시 함수
+    function showLoadingIndicator() {
+        // 이미 있는 결과 확인
+        const existingResults = document.querySelector('.search-results');
+        if (existingResults) {
+            // 로딩 인디케이터를 추가하기 전에 기존 것을 제거
+            const existingIndicator = document.querySelector('.loading-indicator');
+            if (existingIndicator) {
+                existingIndicator.remove();
+            }
+            
+            // 로딩 인디케이터 추가
+            const loadingIndicator = document.createElement('div');
+            loadingIndicator.className = 'loading-indicator';
+            loadingIndicator.innerHTML = '<div class="spinner"></div><p>검색 중...</p>';
+            existingResults.prepend(loadingIndicator);
+        } else {
+            // 검색 결과 섹션이 없으면 새로 생성
+            const resultsSection = document.createElement('section');
+            resultsSection.className = 'search-results';
+            
+            const container = document.createElement('div');
+            container.className = 'container';
+            
+            const loadingIndicator = document.createElement('div');
+            loadingIndicator.className = 'loading-indicator';
+            loadingIndicator.innerHTML = '<div class="spinner"></div><p>검색 중...</p>';
+            
+            container.appendChild(loadingIndicator);
+            resultsSection.appendChild(container);
+            
+            // 결과를 히어로 섹션 바로 다음에 삽입
+            const heroSection = document.querySelector('.hero');
+            heroSection.parentNode.insertBefore(resultsSection, heroSection.nextSibling);
+        }
+    }
 
     // 검색 실행 함수
     function performSearch() {
@@ -138,16 +226,28 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('검색어를 입력해주세요.');
             return;
         }
+        
+        // 검색 히스토리에 저장
+        saveToHistory(searchTerm);
 
-        // 검색 결과 필터링
+        // 검색 결과 필터링 (부분 일치 검색으로 개선)
         const results = certificateData.filter(cert => 
-            cert.name.includes(searchTerm) || 
-            cert.description.includes(searchTerm) ||
-            cert.category.includes(searchTerm)
+            cert.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+            cert.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            cert.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            (cert.issuer && cert.issuer.toLowerCase().includes(searchTerm.toLowerCase()))
         );
 
         // 검색 결과 표시
         displaySearchResults(results, searchTerm);
+        
+        // 검색 후 히스토리 업데이트
+        updateAfterSearch();
+    }
+
+    // 검색 결과가 성공적으로 표시된 후 히스토리 업데이트
+    function updateAfterSearch() {
+        showSearchHistory();
     }
 
     // 검색 결과 표시 함수
@@ -177,8 +277,31 @@ document.addEventListener('DOMContentLoaded', function() {
             noResults.innerHTML = `
                 <p>검색 결과가 없습니다.</p>
                 <p>다른 검색어로 다시 시도해보세요.</p>
+                <div class="suggestions">
+                    <p><strong>추천 검색어:</strong></p>
+                    <div class="suggestion-tags">
+                        <a href="#" class="suggestion-tag" data-term="주민등록">주민등록</a>
+                        <a href="#" class="suggestion-tag" data-term="졸업">졸업</a>
+                        <a href="#" class="suggestion-tag" data-term="소득">소득</a>
+                        <a href="#" class="suggestion-tag" data-term="건강">건강</a>
+                    </div>
+                </div>
             `;
             container.appendChild(noResults);
+            
+            // 추천 검색어 클릭 이벤트 추가
+            setTimeout(() => {
+                const suggestionTags = document.querySelectorAll('.suggestion-tag');
+                suggestionTags.forEach(tag => {
+                    tag.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const term = this.getAttribute('data-term');
+                        searchInput.value = term;
+                        showLoadingIndicator();
+                        performSearch();
+                    });
+                });
+            }, 100);
         } else {
             // 검색 결과 리스트 생성
             const resultsList = document.createElement('div');
@@ -187,12 +310,33 @@ document.addEventListener('DOMContentLoaded', function() {
             results.forEach(cert => {
                 const resultCard = document.createElement('div');
                 resultCard.className = 'result-card';
+                
+                // 검색어 강조 함수
+                function highlightText(text, term) {
+                    if (!text) return '';
+                    const regex = new RegExp(`(${term})`, 'gi');
+                    return text.replace(regex, '<span class="highlight">$1</span>');
+                }
+                
+                let categoryText = cert.category;
+                let nameText = cert.name;
+                let issuerText = cert.issuer || '';
+                let descriptionText = cert.description;
+                
+                // 검색어 강조
+                if (searchTerm) {
+                    categoryText = highlightText(categoryText, searchTerm);
+                    nameText = highlightText(nameText, searchTerm);
+                    issuerText = highlightText(issuerText, searchTerm);
+                    descriptionText = highlightText(descriptionText, searchTerm);
+                }
+                
                 resultCard.innerHTML = `
-                    <h4>${cert.name}</h4>
+                    <h4>${nameText}</h4>
                     <div class="result-details">
-                        <p><strong>카테고리:</strong> ${cert.category}</p>
-                        <p><strong>발급기관:</strong> ${cert.issuer}</p>
-                        <p><strong>설명:</strong> ${cert.description}</p>
+                        <p><strong>카테고리:</strong> ${categoryText}</p>
+                        <p><strong>발급기관:</strong> ${issuerText}</p>
+                        <p><strong>설명:</strong> ${descriptionText}</p>
                         <p><strong>발급방법:</strong> ${cert.issueMethods.join(', ')}</p>
                         <p><strong>수수료:</strong> ${cert.fee}</p>
                         <a href="${cert.url}" target="_blank" class="cert-link">발급 사이트 바로가기</a>
@@ -212,18 +356,183 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // 검색 결과로 스크롤
         resultsSection.scrollIntoView({ behavior: 'smooth' });
+        
+        // 연관 검색어 추천 (실시간 검색 지원)
+        if (results.length > 0) {
+            const relatedTerms = document.createElement('div');
+            relatedTerms.className = 'related-terms';
+            relatedTerms.innerHTML = `
+                <h4>연관 검색어</h4>
+                <div class="related-tags">
+                    ${getRelatedTerms(searchTerm, results).map(term => 
+                        `<a href="#" class="related-tag" data-term="${term}">${term}</a>`
+                    ).join('')}
+                </div>
+            `;
+            container.appendChild(relatedTerms);
+            
+            // 연관 검색어 클릭 이벤트
+            setTimeout(() => {
+                const relatedTags = document.querySelectorAll('.related-tag');
+                relatedTags.forEach(tag => {
+                    tag.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const term = this.getAttribute('data-term');
+                        searchInput.value = term;
+                        showLoadingIndicator();
+                        performSearch();
+                    });
+                });
+            }, 100);
+        }
+    }
+    
+    // 연관 검색어 생성 함수
+    function getRelatedTerms(searchTerm, results) {
+        // 카테고리 기반 연관 검색어 생성
+        const categories = [...new Set(results.map(item => item.category))];
+        // 발급기관 기반 연관 검색어 생성
+        const issuers = [...new Set(results.map(item => item.issuer).filter(Boolean))];
+        
+        // 결합 및 중복 제거
+        let relatedTerms = [...categories, ...issuers];
+        // 현재 검색어와 동일한 단어는 제외
+        relatedTerms = relatedTerms.filter(term => term.toLowerCase() !== searchTerm.toLowerCase());
+        
+        // 최대 5개까지만 반환
+        return relatedTerms.slice(0, 5);
     }
 
     // 카테고리 카드 클릭 이벤트 - 해당 카테고리의 증명서 목록 표시
-    const categoryCards = document.querySelectorAll('.category-card');
     categoryCards.forEach(card => {
         const categoryTitle = card.querySelector('h4').textContent;
         card.addEventListener('click', function() {
             // 카테고리에 해당하는 증명서만 필터링
             const filteredResults = certificateData.filter(cert => cert.category === categoryTitle);
+            searchInput.value = categoryTitle; // 검색창에 카테고리 이름 표시
+            showLoadingIndicator();
+            // 검색 히스토리에 저장
+            saveToHistory(categoryTitle);
             displaySearchResults(filteredResults, categoryTitle);
+            // 검색 후 히스토리 업데이트
+            updateAfterSearch();
+        });
+        
+        // 카테고리 내 각 증명서 링크 클릭 이벤트
+        const certLinks = card.querySelectorAll('ul li a');
+        certLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // 카드 클릭 이벤트 전파 방지
+                const certName = this.textContent;
+                // 해당 이름의 증명서만 필터링
+                const filteredResult = certificateData.filter(cert => cert.name === certName);
+                searchInput.value = certName; // 검색창에 증명서 이름 표시
+                showLoadingIndicator();
+                // 검색 히스토리에 저장
+                saveToHistory(certName);
+                displaySearchResults(filteredResult, certName);
+                // 검색 후 히스토리 업데이트
+                updateAfterSearch();
+            });
         });
     });
+    
+    // 카테고리 카드 키보드 접근성 개선
+    categoryCards.forEach(card => {
+        card.addEventListener('keydown', function(e) {
+            // 엔터 또는 스페이스 키 입력 시 클릭 이벤트 트리거
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    });
+    
+    // 검색 히스토리 저장 및 관리
+    let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+    
+    // 검색 히스토리 저장 함수
+    function saveToHistory(term) {
+        // 중복 검색어 제거
+        searchHistory = searchHistory.filter(item => item.toLowerCase() !== term.toLowerCase());
+        // 새 검색어 추가
+        searchHistory.unshift(term);
+        // 최대 10개까지만 저장
+        if (searchHistory.length > 10) {
+            searchHistory.pop();
+        }
+        // 로컬 스토리지에 저장
+        localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+    }
+    
+    // 검색 히스토리 표시 함수
+    function showSearchHistory() {
+        if (searchHistory.length === 0) return;
+        
+        const historyContainer = document.createElement('div');
+        historyContainer.className = 'search-history';
+        historyContainer.innerHTML = `
+            <h4>최근 검색어</h4>
+            <ul class="history-list">
+                ${searchHistory.map(term => 
+                    `<li>
+                        <a href="#" class="history-item" data-term="${term}">${term}</a>
+                        <button class="remove-history" data-term="${term}" aria-label="검색어 삭제">×</button>
+                    </li>`
+                ).join('')}
+            </ul>
+            <button class="clear-history">검색 기록 삭제</button>
+        `;
+        
+        // 히어로 섹션 아래에 추가
+        const heroSection = document.querySelector('.hero');
+        if (document.querySelector('.search-history')) {
+            document.querySelector('.search-history').remove();
+        }
+        heroSection.after(historyContainer);
+        
+        // 검색 히스토리 항목 클릭 이벤트
+        const historyItems = document.querySelectorAll('.history-item');
+        historyItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const term = this.getAttribute('data-term');
+                searchInput.value = term;
+                showLoadingIndicator();
+                performSearch();
+            });
+        });
+        
+        // 검색어 삭제 버튼 이벤트
+        const removeButtons = document.querySelectorAll('.remove-history');
+        removeButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const term = this.getAttribute('data-term');
+                // 검색 히스토리에서 해당 항목 제거
+                searchHistory = searchHistory.filter(item => item !== term);
+                localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+                // 히스토리 UI 업데이트
+                this.parentElement.remove();
+                if (searchHistory.length === 0) {
+                    document.querySelector('.search-history').remove();
+                }
+            });
+        });
+        
+        // 검색 기록 전체 삭제 버튼 이벤트
+        const clearButton = document.querySelector('.clear-history');
+        clearButton.addEventListener('click', function() {
+            searchHistory = [];
+            localStorage.removeItem('searchHistory');
+            document.querySelector('.search-history').remove();
+        });
+    }
+    
+    // 페이지 로드 시 검색 히스토리 표시
+    showSearchHistory();
 });
 
 // 스타일 추가 (동적으로 생성되는 검색 결과 섹션을 위한 CSS)
@@ -231,76 +540,303 @@ document.head.insertAdjacentHTML('beforeend', `
 <style>
 .search-results {
     padding: 50px 0;
-    background-color: #fff;
+    background-color: #f8f9fa;
 }
 
 .search-results h3 {
     font-size: 1.6rem;
     margin-bottom: 25px;
-    color: #333;
+    color: #2c3e50;
 }
 
 .no-results {
-    background-color: #f8f9fa;
+    background-color: #ffffff;
     padding: 30px;
     text-align: center;
     border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .no-results p {
-    margin-bottom: 10px;
-    color: #666;
+    margin-bottom: 15px;
+    color: #2c3e50;
 }
 
 .results-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 25px;
+    gap: 20px;
 }
 
 .result-card {
-    background-color: #f8f9fa;
+    background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
     padding: 20px;
-    transition: transform 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #e9ecef;
 }
 
 .result-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .result-card h4 {
     font-size: 1.3rem;
     margin-bottom: 15px;
     color: #1a73e8;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
 }
 
 .result-details p {
-    margin-bottom: 8px;
-    color: #555;
+    margin-bottom: 10px;
+    color: #495057;
 }
 
 .cert-link {
     display: inline-block;
-    margin-top: 15px;
     background-color: #1a73e8;
-    color: white;
+    color: #fff;
     padding: 8px 15px;
     border-radius: 5px;
-    font-weight: 500;
+    margin-top: 10px;
     transition: background-color 0.3s;
 }
 
 .cert-link:hover {
-    background-color: #1557b0;
+    background-color: #0d47a1;
+}
+
+/* 실시간 검색 관련 스타일 */
+.loading-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e9ecef;
+    border-top: 4px solid #1a73e8;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.highlight {
+    background-color: #fff3cd;
+    padding: 2px 0;
+    font-weight: bold;
+    color: #856404;
+}
+
+.suggestions, .related-terms {
+    margin-top: 20px;
+}
+
+.suggestion-tags, .related-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.suggestion-tag, .related-tag {
+    background-color: #e3f2fd;
+    color: #1a73e8;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.suggestion-tag:hover, .related-tag:hover {
+    background-color: #bbdefb;
+}
+
+.related-terms h4 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
 }
 
 @media (max-width: 768px) {
     .results-list {
         grid-template-columns: 1fr;
+    }
+    
+    .suggestion-tags, .related-tags {
+        justify-content: center;
+    }
+}
+
+/* 검색 히스토리 스타일 */
+.search-history {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    max-width: 800px;
+    margin: -30px auto 30px;
+    position: relative;
+    z-index: 10;
+    border: 1px solid #e9ecef;
+}
+
+.search-history h4 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.history-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.history-list li {
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #e9ecef;
+}
+
+.history-item {
+    padding: 5px 12px;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.remove-history {
+    background: none;
+    border: none;
+    color: #adb5bd;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0 8px;
+    transition: color 0.3s;
+}
+
+.remove-history:hover {
+    color: #dc3545;
+}
+
+.clear-history {
+    background: none;
+    border: none;
+    color: #6c757d;
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 5px;
+    float: right;
+    margin-top: -30px;
+}
+
+.clear-history:hover {
+    text-decoration: underline;
+    color: #495057;
+}
+
+@media (max-width: 768px) {
+    .search-history {
+        margin: -20px 20px 20px;
+    }
+    
+    .history-list {
+        justify-content: center;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .search-results {
+        background-color: #1a1a1a;
+    }
+    
+    .search-results h3 {
+        color: #e0e0e0;
+    }
+    
+    .no-results {
+        background-color: #2d2d2d;
+    }
+    
+    .no-results p {
+        color: #e0e0e0;
+    }
+    
+    .result-card {
+        background-color: #2d2d2d;
+        border-color: #404040;
+    }
+    
+    .result-card h4 {
+        color: #64b5f6;
+    }
+    
+    .result-details p {
+        color: #e0e0e0;
+    }
+    
+    .highlight {
+        background-color: #4a4a4a;
+        color: #ffd700;
+    }
+    
+    .suggestion-tag, .related-tag {
+        background-color: #3d3d3d;
+        color: #64b5f6;
+    }
+    
+    .suggestion-tag:hover, .related-tag:hover {
+        background-color: #4a4a4a;
+    }
+    
+    .search-history {
+        background-color: #2d2d2d;
+        border-color: #404040;
+    }
+    
+    .search-history h4 {
+        color: #e0e0e0;
+    }
+    
+    .history-list li {
+        background-color: #3d3d3d;
+        border-color: #404040;
+    }
+    
+    .history-item {
+        color: #e0e0e0;
+    }
+    
+    .remove-history {
+        color: #808080;
+    }
+    
+    .remove-history:hover {
+        color: #ff6b6b;
+    }
+    
+    .clear-history {
+        color: #808080;
+    }
+    
+    .clear-history:hover {
+        color: #e0e0e0;
     }
 }
 </style>
