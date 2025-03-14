@@ -333,6 +333,53 @@ const certificateData = [
     }
 ];
 
+// 샘플 피드백 데이터 - 실제로는 서버에서 받아올 데이터
+const sampleFeedbacks = [
+    {
+        id: 1,
+        name: "김지민",
+        email: "jimin@example.com",
+        category: "suggestion",
+        feedback: "증명서 발급 시간을 조금 더 단축했으면 좋겠습니다. 현재는 대기 시간이 조금 긴 것 같아요.",
+        date: "2023-05-15"
+    },
+    {
+        id: 2,
+        name: "이승호",
+        email: "seungho@example.com",
+        category: "compliment",
+        feedback: "UI가 매우 직관적이고 사용하기 편리합니다. 특히 검색 기능이 정확해서 좋아요!",
+        date: "2023-05-10"
+    },
+    {
+        id: 3,
+        name: "박소연",
+        email: "soyeon@example.com",
+        category: "error",
+        feedback: "모바일에서 특정 증명서를 선택할 때 가끔 오류가 발생합니다. 확인 부탁드립니다.",
+        date: "2023-05-08"
+    },
+    {
+        id: 4,
+        name: "정다운",
+        email: "dawoon@example.com",
+        category: "question",
+        feedback: "해외에서도 증명서 발급이 가능한가요? 현재 외국에 거주 중인데 서비스를 이용할 수 있을지 궁금합니다.",
+        date: "2023-05-05"
+    },
+    {
+        id: 5,
+        name: "최준서",
+        email: "junseo@example.com",
+        category: "suggestion",
+        feedback: "카테고리별로 인기 있는 증명서를 표시해주면 더 좋을 것 같아요.",
+        date: "2023-05-03"
+    }
+];
+
+// 로컬 스토리지 키
+const FEEDBACK_STORAGE_KEY = 'userFeedbacks';
+
 // DOM이 로드된 후 실행
 document.addEventListener('DOMContentLoaded', function() {
     // 검색 기능 구현
@@ -754,7 +801,139 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 페이지 로드 시 검색 히스토리 표시
     showSearchHistory();
+
+    // 피드백 폼이 있는지 확인
+    const feedbackForm = document.getElementById('feedbackForm');
+    if (feedbackForm) {
+        initializeFeedbackPage();
+    }
+    
+    // 기존 코드에 방해되지 않도록 여기서 실행 종료
+    if (!feedbackForm) return;
+    
+    // 피드백 폼 제출 이벤트 처리
+    feedbackForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        submitFeedback();
+    });
 });
+
+// 피드백 페이지 초기화
+function initializeFeedbackPage() {
+    // 샘플 데이터와 로컬 스토리지의 데이터를 합쳐 표시
+    displayFeedbacks();
+}
+
+// 피드백 제출 처리
+function submitFeedback() {
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const feedbackInput = document.getElementById('feedback');
+    const categorySelect = document.getElementById('category');
+    const agreeCheckbox = document.getElementById('agree');
+    
+    // 입력값 검증
+    if (!nameInput.value || !emailInput.value || !feedbackInput.value || !agreeCheckbox.checked) {
+        return; // HTML의 required 속성이 처리
+    }
+    
+    // 새로운 피드백 객체 생성
+    const newFeedback = {
+        id: Date.now(), // 고유 ID 생성
+        name: nameInput.value,
+        email: emailInput.value,
+        feedback: feedbackInput.value,
+        category: categorySelect.value,
+        date: formatDate(new Date())
+    };
+    
+    // 로컬 스토리지에 피드백 저장
+    saveFeedback(newFeedback);
+    
+    // 목록 새로고침
+    displayFeedbacks();
+    
+    // 폼 초기화
+    feedbackForm.reset();
+    
+    // 성공 메시지 표시
+    alert('피드백이 성공적으로 제출되었습니다. 감사합니다!');
+}
+
+// 로컬 스토리지에 피드백 저장
+function saveFeedback(feedback) {
+    let userFeedbacks = localStorage.getItem(FEEDBACK_STORAGE_KEY);
+    
+    if (userFeedbacks) {
+        userFeedbacks = JSON.parse(userFeedbacks);
+        userFeedbacks.unshift(feedback); // 새 피드백을 배열 맨 앞에 추가
+    } else {
+        userFeedbacks = [feedback];
+    }
+    
+    localStorage.setItem(FEEDBACK_STORAGE_KEY, JSON.stringify(userFeedbacks));
+}
+
+// 피드백 목록 표시
+function displayFeedbacks() {
+    const feedbackList = document.getElementById('feedbackList');
+    if (!feedbackList) return;
+    
+    // 로컬 스토리지에서 사용자 피드백 가져오기
+    let userFeedbacks = localStorage.getItem(FEEDBACK_STORAGE_KEY);
+    userFeedbacks = userFeedbacks ? JSON.parse(userFeedbacks) : [];
+    
+    // 모든 피드백 데이터 합치기 (실제로는 API에서 가져올 것)
+    const allFeedbacks = [...userFeedbacks, ...sampleFeedbacks];
+    
+    // 날짜 기준으로 최신순 정렬
+    allFeedbacks.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    // 피드백 목록 HTML 생성
+    let feedbackHTML = '';
+    
+    if (allFeedbacks.length === 0) {
+        feedbackHTML = '<p class="no-feedbacks">아직 등록된 피드백이 없습니다.</p>';
+    } else {
+        allFeedbacks.forEach(item => {
+            feedbackHTML += `
+                <div class="feedback-item">
+                    <div class="feedback-item-header">
+                        <span class="feedback-name">${item.name}</span>
+                        <span class="feedback-date">${item.date}</span>
+                    </div>
+                    <span class="feedback-category ${item.category}">${getCategoryName(item.category)}</span>
+                    <p class="feedback-text">${item.feedback}</p>
+                </div>
+            `;
+        });
+    }
+    
+    // HTML 삽입
+    feedbackList.innerHTML = feedbackHTML;
+}
+
+// 카테고리 코드를 한글 이름으로 변환
+function getCategoryName(category) {
+    const categoryMap = {
+        'suggestion': '개선 제안',
+        'error': '오류 신고',
+        'compliment': '칭찬',
+        'question': '문의사항',
+        'other': '기타'
+    };
+    
+    return categoryMap[category] || '기타';
+}
+
+// 날짜 포맷팅 (YYYY-MM-DD)
+function formatDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+}
 
 // 스타일 추가 (동적으로 생성되는 검색 결과 섹션을 위한 CSS)
 document.head.insertAdjacentHTML('beforeend', `
