@@ -84,7 +84,7 @@ const certificateData = [
         issuer: "근무지",
         issueMethods: ["근무지 방문", "워크넷"],
         description: "근무 기간과 담당 업무 등을 증명하는 문서입니다.",
-        url: "https://www.work.go.kr",
+        url: "https://www.work24.go.kr/cm/c/b/1100/selectBbttInfo.do?polySvcFomtId=FM00000264",
         fee: "무료~3,000원",
         requiredDocs: "신분증"
     },
