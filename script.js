@@ -234,12 +234,12 @@ const certificateData = [
     },
     {
         id: 22,
-        name: "재학증명서",
+        name: "대학교 재학 증명서",
         category: "교육",
         issuer: "각 교육기관",
-        issueMethods: ["교육기관 방문", "교육기관 홈페이지"],
+        issueMethods: ["교육기관 방문", "교육기관 홈페이지", "정부24"],
         description: "현재 학교에 재학 중임을 증명하는 문서입니다.",
-        url: "해당 교육기관 홈페이지",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=&CappBizCD=13404000010",
         fee: "500원~2,000원",
         requiredDocs: "신분증 또는 학생증"
     },
@@ -314,9 +314,9 @@ const certificateData = [
         name: "진단서",
         category: "건강·의료",
         issuer: "의료기관",
-        issueMethods: ["의료기관 방문"],
+        issueMethods: ["의료기관 방문", "정부24"],
         description: "의사가 환자의 질병이나 상해 상태를 증명하는 문서입니다.",
-        url: "해당 의료기관 문의",
+        url: "https://www.gov.kr/portal/service/serviceInfo/PTR000050357",
         fee: "5,000원~30,000원",
         requiredDocs: "신분증"
     },
