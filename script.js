@@ -7,7 +7,7 @@ const certificateData = [
         issuer: "행정안전부",
         issueMethods: ["정부24", "주민센터 방문"],
         description: "주민등록법에 따라 세대별 주민등록표에 기재한 내용을 증명하기 위해 발급하는 문서입니다.",
-        url: "https://www.gov.kr",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13100000015",
         fee: "무료 (온라인 발급 시)",
         requiredDocs: "신분증"
     },
@@ -18,7 +18,7 @@ const certificateData = [
         issuer: "행정안전부",
         issueMethods: ["정부24", "주민센터 방문"],
         description: "개인별 주민등록표에 기재한 내용을 증명하기 위해 발급하는 문서입니다.",
-        url: "https://www.gov.kr",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13100000015",
         fee: "무료 (온라인 발급 시)",
         requiredDocs: "신분증"
     },
@@ -29,7 +29,7 @@ const certificateData = [
         issuer: "법원행정처",
         issueMethods: ["정부24", "주민센터 방문", "대법원 전자가족관계등록시스템"],
         description: "가족관계등록부에 기록된 출생, 혼인, 사망 등 가족관계에 관한 사항을 증명하는 문서입니다.",
-        url: "https://efamily.scourt.go.kr",
+        url: "https://efamily.scourt.go.kr/pt/PtFrrpApplrInfoInqW.do?menuFg=02",
         fee: "1,000원 (온라인 발급 시)",
         requiredDocs: "신분증"
     },
@@ -40,13 +40,13 @@ const certificateData = [
         issuer: "국토교통부",
         issueMethods: ["정부24", "주민센터 방문", "부동산종합공부시스템"],
         description: "토지의 소재, 지번, 지목, 면적 등 토지에 관한 사항을 증명하는 문서입니다.",
-        url: "https://www.gov.kr",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13100000026",
         fee: "1,000원",
         requiredDocs: "신분증"
     },
     {
         id: 5,
-        name: "건축물대장",
+        name: "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=15000000098",
         category: "부동산",
         issuer: "국토교통부",
         issueMethods: ["정부24", "주민센터 방문", "세움터"],
@@ -62,7 +62,7 @@ const certificateData = [
         issuer: "국세청",
         issueMethods: ["홈택스", "세무서 방문"],
         description: "개인이 신고한 소득금액을 증명하는 문서입니다.",
-        url: "https://www.hometax.go.kr",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=&CappBizCD=12100000021",
         fee: "무료 (온라인 발급 시)",
         requiredDocs: "공동인증서 또는 신분증"
     },
@@ -73,7 +73,7 @@ const certificateData = [
         issuer: "각 교육기관",
         issueMethods: ["교육기관 방문", "정부24", "민원24"],
         description: "학교 졸업 사실을 증명하는 문서입니다.",
-        url: "https://www.gov.kr",
+        url: "https://www.https://www.gov.kr/search?srhQuery=%EC%A1%B8%EC%97%85%EC%A6%9D%EB%AA%85%EC%84%9C.kr",
         fee: "500원~2,000원",
         requiredDocs: "신분증"
     },
@@ -84,7 +84,7 @@ const certificateData = [
         issuer: "근무지",
         issueMethods: ["근무지 방문", "워크넷"],
         description: "근무 기간과 담당 업무 등을 증명하는 문서입니다.",
-        url: "https://www.work24.go.kr/cm/c/b/1100/selectBbttInfo.do?polySvcFomtId=FM00000264",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=&CappBizCD=00000000008",
         fee: "무료~3,000원",
         requiredDocs: "신분증"
     },
@@ -95,7 +95,7 @@ const certificateData = [
         issuer: "국민건강보험공단",
         issueMethods: ["건강보험공단 홈페이지", "공단 지사 방문"],
         description: "건강보험 자격의 취득과 상실 이력을 증명하는 문서입니다.",
-        url: "https://www.nhis.or.kr",
+        url: "https://www.gov.kr/portal/service/serviceInfo/PTR000050333",
         fee: "무료 (온라인 발급 시)",
         requiredDocs: "공동인증서 또는 신분증"
     },
@@ -106,7 +106,7 @@ const certificateData = [
         issuer: "질병관리청",
         issueMethods: ["예방접종도우미 홈페이지", "보건소 방문"],
         description: "예방접종 내역을 증명하는 문서입니다.",
-        url: "https://nip.kdca.go.kr",
+        url: "https://nip.kdca.go.kr/irhp/mngm/goVcntMngm.do?menuLv=3&menuCd=341",
         fee: "무료",
         requiredDocs: "공동인증서 또는 신분증"
     },
@@ -117,7 +117,7 @@ const certificateData = [
         issuer: "국세청",
         issueMethods: ["홈택스", "세무서 방문"],
         description: "근로소득원천징수 내역을 증명하는 문서입니다.",
-        url: "https://www.hometax.go.kr",
+        url: "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&menuCd=index3",
         fee: "무료",
         requiredDocs: "공동인증서 또는 신분증"
     },
@@ -129,7 +129,7 @@ const certificateData = [
         issuer: "법원행정처",
         issueMethods: ["정부24", "주민센터 방문", "대법원 전자가족관계등록시스템"],
         description: "혼인 및 이혼에 관한 사항을 증명하는 문서입니다.",
-        url: "https://efamily.scourt.go.kr",
+        url: "https://efamily.scourt.go.kr/pt/PtFrrpApplrInfoInqW.do?menuFg=04",
         fee: "1,000원 (온라인 발급 시)",
         requiredDocs: "신분증"
     },
@@ -140,7 +140,7 @@ const certificateData = [
         issuer: "법원행정처",
         issueMethods: ["정부24", "주민센터 방문", "대법원 전자가족관계등록시스템"],
         description: "개인의 출생, 사망, 국적 등 신분사항을 증명하는 문서입니다.",
-        url: "https://efamily.scourt.go.kr",
+        url: "https://efamily.scourt.go.kr/pt/PtFrrpApplrInfoInqW.do?menuFg=03",
         fee: "1,000원 (온라인 발급 시)",
         requiredDocs: "신분증"
     },
@@ -151,7 +151,7 @@ const certificateData = [
         issuer: "대법원",
         issueMethods: ["인터넷등기소", "등기소 방문"],
         description: "부동산의 소유권, 저당권 등 권리관계를 증명하는 문서입니다.",
-        url: "https://www.iros.go.kr",
+        url: "https://www.gov.kr/search?srhQuery=%EB%93%B1%EA%B8%B0%EB%B6%80%EB%93%B1%EB%B3%B8",
         fee: "1,000원~2,000원",
         requiredDocs: "신분증"
     },
@@ -162,7 +162,7 @@ const certificateData = [
         issuer: "국토교통부",
         issueMethods: ["정부24", "주민센터 방문"],
         description: "토지의 이용계획과 규제내용을 확인하는 문서입니다.",
-        url: "https://www.gov.kr",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=&CappBizCD=15000000013",
         fee: "1,000원",
         requiredDocs: "신분증"
     },
@@ -173,7 +173,7 @@ const certificateData = [
         issuer: "국토교통부",
         issueMethods: ["정부24", "주민센터 방문", "부동산공부시스템"],
         description: "토지와 건물의 다양한 정보를 종합적으로 증명하는 문서입니다.",
-        url: "https://www.gov.kr",
+        url: "https://kras.seoul.go.kr/land_info/info/baseInfo/baseInfo.do",
         fee: "1,500원",
         requiredDocs: "신분증"
     },
@@ -184,7 +184,7 @@ const certificateData = [
         issuer: "국세청",
         issueMethods: ["홈택스", "세무서 방문"],
         description: "국세의 납부 완료 여부를 증명하는 문서입니다.",
-        url: "https://www.hometax.go.kr",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=&CappBizCD=12100000011",
         fee: "무료 (온라인 발급 시)",
         requiredDocs: "공동인증서 또는 신분증"
     },
@@ -195,7 +195,7 @@ const certificateData = [
         issuer: "국세청",
         issueMethods: ["홈택스", "세무서 방문"],
         description: "사업자등록 사실을 증명하는 문서입니다.",
-        url: "https://www.hometax.go.kr",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=A09002&CappBizCD=12100000016&tp_seq=01",
         fee: "무료 (온라인 발급 시)",
         requiredDocs: "공동인증서 또는 신분증"
     },
@@ -206,7 +206,7 @@ const certificateData = [
         issuer: "지방자치단체",
         issueMethods: ["위택스", "주민센터 방문"],
         description: "지방세의 납부 완료 여부를 증명하는 문서입니다.",
-        url: "https://www.wetax.go.kr",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13100000056",
         fee: "무료 (온라인 발급 시)",
         requiredDocs: "공동인증서 또는 신분증"
     },
@@ -217,7 +217,7 @@ const certificateData = [
         issuer: "국세청",
         issueMethods: ["홈택스", "세무서 방문"],
         description: "모든 세금의 완납 여부를 증명하는 문서입니다.",
-        url: "https://www.hometax.go.kr",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=&CappBizCD=12100000011",
         fee: "무료 (온라인 발급 시)",
         requiredDocs: "공동인증서 또는 신분증"
     },
@@ -228,7 +228,7 @@ const certificateData = [
         issuer: "각 교육기관",
         issueMethods: ["교육기관 방문", "교육기관 홈페이지"],
         description: "학업 성적을 증명하는 문서입니다.",
-        url: "해당 교육기관 홈페이지",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=&CappBizCD=13404000008",
         fee: "500원~3,000원",
         requiredDocs: "신분증"
     },
@@ -250,7 +250,7 @@ const certificateData = [
         issuer: "각 교육기관",
         issueMethods: ["교육기관 방문", "교육기관 홈페이지", "홈택스"],
         description: "교육비 납입 내역을 증명하는 문서입니다.",
-        url: "해당 교육기관 홈페이지",
+        url: "https://www.gov.kr/main?a=AA020InfoCappViewApp&HighCtgCD=&CappBizCD=13404000012",
         fee: "무료~1,000원",
         requiredDocs: "신분증 또는 학생증"
     },
@@ -261,7 +261,7 @@ const certificateData = [
         issuer: "교육청",
         issueMethods: ["정부24", "교육청 방문"],
         description: "검정고시 합격 사실을 증명하는 문서입니다.",
-        url: "https://www.gov.kr",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=&CappBizCD=13404000021",
         fee: "무료",
         requiredDocs: "신분증"
     },
@@ -272,7 +272,7 @@ const certificateData = [
         issuer: "근무지",
         issueMethods: ["근무지 방문", "사내 시스템"],
         description: "현재 회사에 재직 중임을 증명하는 문서입니다.",
-        url: "해당 근무지 문의",
+        url: "https://www.gov.kr/main?a=AA020InfoCappViewApp&CappBizCD=00000000008",
         fee: "무료",
         requiredDocs: "사원증 또는 신분증"
     },
@@ -283,7 +283,7 @@ const certificateData = [
         issuer: "이전 근무지",
         issueMethods: ["이전 근무지 방문", "우편 신청"],
         description: "이전 직장의 퇴직 사실을 증명하는 문서입니다.",
-        url: "해당 근무지 문의",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=&CappBizCD=00000000008",
         fee: "무료~3,000원",
         requiredDocs: "신분증"
     },
@@ -294,7 +294,7 @@ const certificateData = [
         issuer: "국민건강보험공단",
         issueMethods: ["4대사회보험 정보연계센터", "건강보험공단 방문"],
         description: "국민연금, 건강보험, 고용보험, 산재보험의 가입 여부를 증명하는 문서입니다.",
-        url: "https://www.4insure.or.kr",
+        url: "https://www.gov.kr/portal/service/serviceInfo/B55201500032",
         fee: "무료",
         requiredDocs: "공동인증서 또는 신분증"
     },
@@ -305,7 +305,7 @@ const certificateData = [
         issuer: "국민건강보험공단",
         issueMethods: ["건강보험공단 홈페이지", "검진기관 방문"],
         description: "건강검진 결과를 증명하는 문서입니다.",
-        url: "https://www.nhis.or.kr",
+        url: "https://www.nhis.or.kr/static/html/guide/sub2_010501.html",
         fee: "무료 (온라인 발급 시)",
         requiredDocs: "공동인증서 또는 신분증"
     },
@@ -327,7 +327,7 @@ const certificateData = [
         issuer: "의료기관",
         issueMethods: ["의료기관 방문", "건강보험공단 홈페이지", "홈택스"],
         description: "의료비 납부 내역을 증명하는 문서입니다.",
-        url: "https://www.nhis.or.kr",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=SG4CADM2017",
         fee: "무료~2,000원",
         requiredDocs: "공동인증서 또는 신분증"
     }
