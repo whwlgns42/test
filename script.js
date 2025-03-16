@@ -330,6 +330,61 @@ const certificateData = [
         url: "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=SG4CADM2017",
         fee: "무료~2,000원",
         requiredDocs: "공동인증서 또는 신분증"
+    },
+    {
+        id: 31,
+        name: "여권",
+        category: "신분증",
+        issuer: "정부24",
+        issueMethods: ["여권 발급 신청", "대사관 방문"],
+        description: "국민이 해외에서 신분을 증명하기 위해 발급받는 문서입니다.",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=12600000001",
+        fee: "50,000원",
+        requiredDocs: "신분증, 사진"
+    },
+    {
+        id: 32,
+        name: "운전면허증",
+        category: "신분증",
+        issuer: "정부24",
+        issueMethods: ["운전면허시험장 방문"],
+        description: "자동차를 운전할 수 있는 자격을 증명하는 문서입니다.",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=A08004&CappBizCD=13200000029",
+        fee: "30,000원",
+        requiredDocs: "신분증, 사진"
+    },
+    {
+        id: 33,
+        name: "국가유공자증명서",
+        category: "사회복지",
+        issuer: "보훈처",
+        issueMethods: ["보훈청 방문", "온라인 신청"],
+        description: "국가를 위해 헌신한 유공자를 증명하는 문서입니다.",
+        url: "https://www.mpva.go.kr/mpva/index.do",
+        fee: "무료",
+        requiredDocs: "신분증"
+    },
+    {
+        id: 34,
+        name: "장애인등록증",
+        category: "사회복지",
+        issuer: "정부24",
+        issueMethods: ["구청 방문", "온라인 신청"],
+        description: "장애인을 증명하는 문서입니다.",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=&CappBizCD=14600000273",
+        fee: "무료",
+        requiredDocs: "신분증, 진단서"
+    },
+    {
+        id: 35,
+        name: "주민등록증",
+        category: "신분증",
+        issuer: "정부24",
+        issueMethods: ["주민센터 방문"],
+        description: "국민의 신분을 증명하는 문서입니다.",
+        url: "https://www.gov.kr/mw/AA020InfoCappView.do?HighCtgCD=A01010&CappBizCD=13100000018",
+        fee: "무료",
+        requiredDocs: "신분증, 사진"
     }
 ];
 
